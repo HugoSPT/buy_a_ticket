@@ -127,6 +127,6 @@ class VenueEventBlockView(View):
             return JsonResponse({'error': f'Event with id {event_id} not found'}, status=404)
 
         response, status = ({}, 200) if result \
-            else ({'error': f'Couldn\'t seat all people. Missing space for {result}'}, 403)
+            else ({'error': f'Couldn\'t block the seat because it is not free.'}, 403)
 
         return JsonResponse(response, status=status)

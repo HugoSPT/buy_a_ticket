@@ -360,7 +360,6 @@ class Event(EmbeddedDocument):
 
 
 class Venue(Document):
-    id = StringField()
     venue_name = StringField()
     input_json = DictField()
     base_layout = MapField(EmbeddedDocumentField(Section))
@@ -392,7 +391,7 @@ class Venue(Document):
         for section in sections:
             self.base_layout[section['section_type']] = Section.create_section(section)
 
-        self.save()
+        self.save(load_bulk=False)
 
     def create_event(self, date: datetime, event_name: str ='Test Event') -> Event:
         """

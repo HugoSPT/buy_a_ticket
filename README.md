@@ -1,5 +1,10 @@
-# Work done
-API: `http://54.226.83.223:8000/api/v1.0/ip/28.180.236.152`. But README first please.
+## Work done
+The works is deployed on `http://ec2-52-201-255-102.compute-1.amazonaws.com/` so you just need to append all endpoints
+to this domain. I also have a venue and event ready to be tested with its reservation in
+`http://ec2-52-201-255-102.compute-1.amazonaws.com/venue/5a41902e37327c0080903f7f/event/5a41904337327c0080903f80`
+
+In case you don't want to create venues or events just use the IDs provided in the url above and use them with the
+`reserve` and `block` endpoints.
 
 ## System Description
 This project implements a very simple event reservation system where people can buy tickets for
@@ -8,17 +13,9 @@ different sections of the venue.
 All the project was developed using Python and Django web framework.
 
 ### Requirements
-Python 3.6.2 (this is important due the new dict implementation and f strings)
-MongoDB
+Python 3.6.2 (this is important due the new `dict` implementation in 3.6.2 and `f-strings` in 3.6 in general)
 
-
-### API
-The API provides an endpoint to get an IP's info.
-
-The root endpoint is `/api/v1.0/ip/<ip_address>`. The use of `/v1.0/` is useful for versioning and keeping backwards
-compatibility. We can develop a new version of the API (let's say `2.0`) without changing anything from the version
-`1.0`, keeping the clients unchanged.
-
+MongoDB (3.4.9 in my local and 3.2.11 in AWS)
 
 ## Installation
 These are the steps to setup the local environment to both run the importer and the API.
@@ -27,9 +24,8 @@ These are the steps to setup the local environment to both run the importer and 
 
 2. Install `requirements.txt` in root directory (`pip install -r requirements.txt`)
 
-3. Export Django's settings module `export DJANGO_SETTINGS_MODULE=buy_a_ticket.settings`
-(in the case you want to run tests)
-
+3. In the case you want to run tests, export Django's settings module
+`export DJANGO_SETTINGS_MODULE=buy_a_ticket.settings` and set `ENV` variable to `test` (`export ENV=test`)
 
 And you should be ready to start!
 
@@ -39,10 +35,12 @@ And you should be ready to start!
 ### API
 To run the API just type `python manage.py runserver` and you are ready to make requests against it.
 
-
 ## Endpoints
 
-The API expose 5 endpoints.
+The API expose 5 endpoints under the path `/api/1.0/`. The use of `/1.0/` is useful for versioning and keeping backwards
+compatibility. We can develop a new version of the API (let's say `2.0`) without changing anything from the version
+`1.0`, keeping the clients unchanged.
+
 
 ### `GET /api/1.0/venues/<page>/`
 
@@ -109,6 +107,8 @@ The JSON above will create a venue called `Venue Name` with two sections, `house
 
 Section `house` has 9 rows, 6 in 1st Rank, 2 in 2nd Rank and 1 in 3rd Rank. The seats in 1st Rank rows are
 non-sequential` ordered (1 3 5 6 4 2) and the sests in 2nd and 3rd rows are `sequential`ordered (1 2 3 4...).
+
+You can add as much sections as you want and for each section you can also add as much rows with different ranks as you want.
 
 ### `GET /api/1.0/venue/<venue_id>/event/<event_id>/`
 
@@ -202,5 +202,6 @@ in every reservation. But then a synchronization problem needs to be solved due 
 the same data.
 * I've done the minimum unit test possible due lack of time. In a "real case" I would make tests for almost every
 function both in API endpoints and models.
+* Very low or almost inexistent input validation.
 
 Looking forward for your feedback!

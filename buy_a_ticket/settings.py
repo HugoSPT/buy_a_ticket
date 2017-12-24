@@ -25,7 +25,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = ')_mx**6sbq1-l_r8vvlwaq&y#aklc&6$dfa59%5qzm5_1fqlcx'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -126,7 +126,4 @@ DATE_FMT = '%d-%m-%YT%H:%M:%S'
 API_VERSION = '1.0'
 API_URL = f'http://localhost:8000/api/{API_VERSION}'
 
-
-PROJECT_DIR = os.path.dirname(__file__)
-STATIC_ROOT = os.path.join(PROJECT_DIR, 'static')
 STATIC_URL = '/static/'
