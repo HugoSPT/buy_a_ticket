@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% for section_type, sections in event.sections.items %}
+    <div id="section" class="clear">
+        <h2>Section: {{ section_type }}</h2>
+        {% for rank, rows in sections.rows.items %}
+        <div id="row-rank" class="clear">
+            <h3>Rank: {{ rank }}</h3>
+            {% for row in rows %}
+                <div id="row" class="clear">
+                    <span>Row ID: {{ row.row_id }}</span>
+                    {% for seat in row.seats %}
+                    <div id="seats">
+                        <div id="seat" class="{% if seat.is_free and not seat.is_blocked %}free
+                            {% else %}occupied{% endif %}">
+                            {{ seat.seat_id }}
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            {% endfor %}
+        </div>
+        {% endfor %}
+    </div>
+    {% endfor %}
+{% endblock %}
