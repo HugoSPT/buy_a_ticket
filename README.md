@@ -50,6 +50,10 @@ Lists all venues (10 per page)
 
 Show `<venue_id>` venue info
 
+By default the `events` and `base_layout` are not returned in the response.
+Optionally pass `events=True` and `layout=True` to get these fields as well.
+(e.g. `http://ec2-52-201-255-102.compute-1.amazonaws.com/api/1.0/venue/5a41902e37327c0080903f7f?layout=True&events=True`
+
 ### `POST /api/1.0/venue/`
 
 creates a new venue providing a JSON in the request. The JSON has the following format:
